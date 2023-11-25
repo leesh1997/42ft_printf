@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_int.c                                    :+:      :+:    :+:   */
+/*   ft_printf_u.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 10:03:57 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:07:49 by seunghun         ###   ########.fr       */
+/*   Created: 2023/11/25 15:03:12 by seunghun          #+#    #+#             */
+/*   Updated: 2023/11/25 17:05:51 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_int(int n)
+int	printf_u(unsigned int n)
 {
-	int	cnt;
-	int	num;
+	unsigned int	cnt;
+	unsigned int	nb;
 
-	cnt = 0;
-	num = n;
-	if (n < 0 && n > -2147483648)
+	nb = n;
+	if (nb >= 10)
 	{
-		num = -n;
+		printf_u(nb / 10);
+		printf_u(nb % 10);
+	}
+	if (nb < 10)
+	{
+		ft_putchar_fd(nb + '0', 1);
+	}
+	cnt = 1;
+	while (n >= 10)
+	{
+		n /= 10;
 		cnt++;
 	}
-	while (num)
-	{
-		num / 10;
-		cnt++;
-	}
-	if (n == -2147483648)
-		cnt = 11;
-	ft_putnbr_fd(n, 1);
 	return (cnt);
 }

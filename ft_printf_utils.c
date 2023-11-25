@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 09:44:48 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/23 09:45:14 by seunghun         ###   ########.fr       */
+/*   Created: 2023/11/25 16:54:01 by seunghun          #+#    #+#             */
+/*   Updated: 2023/11/25 16:54:36 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ char	*ft_strchr(const char *str, int c)
 
 void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	if (!(write(fd, &c, 1)))
+		return ;
 }
 
 void	ft_putstr_fd(char *s, int fd)
 {
 	while (*s)
-		write(fd, s++, 1);
+	{
+		if (!(write(fd, s++, 1)))
+			return ;
+	}
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -47,13 +51,15 @@ void	ft_putnbr_fd(int n, int fd)
 
 	if (n == -2147483648)
 	{
-		write(fd, "-2147483648", 11);
+		if (!(write(fd, "-2147483648", 11)))
+			return ;
 		return ;
 	}
 	else if (n < 0)
 	{
 		n *= -1;
-		write(fd, "-", 1);
+		if (!(write(fd, "-", 1)))
+			return ;
 	}
 	if (n >= 10)
 	{
@@ -63,6 +69,7 @@ void	ft_putnbr_fd(int n, int fd)
 	if (n < 10)
 	{
 		result = n + '0';
-		write(fd, &result, 1);
+		if (!(write(fd, &result, 1)))
+			return ;
 	}
 }
