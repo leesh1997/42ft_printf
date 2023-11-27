@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:54:01 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/25 16:54:36 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:33:54 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ char	*ft_strchr(const char *str, int c)
 	return (0);
 }
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
 	if (!(write(fd, &c, 1)))
-		return ;
+		return (-1);
+	return (1);
 }
 
 void	ft_putstr_fd(char *s, int fd)

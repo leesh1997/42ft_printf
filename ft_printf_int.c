@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:03:57 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:07:49 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:35:27 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@ int	printf_int(int n)
 
 	cnt = 0;
 	num = n;
-	if (n < 0 && n > -2147483648)
+	ft_putnbr_fd(n, 1);
+	if (num == 0)
+		cnt++;
+	if (num < 0 && num > -2147483648)
 	{
-		num = -n;
+		num = -num;
 		cnt++;
 	}
 	while (num)
 	{
-		num / 10;
+		num /= 10;
 		cnt++;
 	}
 	if (n == -2147483648)
 		cnt = 11;
-	ft_putnbr_fd(n, 1);
 	return (cnt);
 }

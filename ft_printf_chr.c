@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 09:57:10 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:08:02 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:36:30 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	printf_chr(char c)
 {
-	ft_putchar_fd(c, 1);
+	if (!(ft_putchar_fd(c, 1)))
+		return (-1);
 	return (1);
 }
