@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:27:25 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/27 20:35:38 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:37:46 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 static int	er_code(void)
 {
 	return (-1);
+}
+
+static int	end_f(int cnt, va_list ap)
+{
+	if (cnt == -1)
+	{
+		va_end(ap);
+		return (-1);
+	}
+	return (1);
 }
 
 static int	type_chk(char format, va_list ap)
@@ -34,6 +44,8 @@ static int	type_chk(char format, va_list ap)
 		cnt += printf_u(va_arg(ap, unsigned int));
 	else if (format == 'x' || format == 'X')
 		cnt += printf_x(format, va_arg(ap, unsigned int));
+	else if (format == '%')
+		cnt += printf_chr('%');
 	else
 		cnt += er_code();
 	return (cnt);
@@ -41,8 +53,8 @@ static int	type_chk(char format, va_list ap)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list			ap;
-	unsigned int	cnt;
+	va_list	ap;
+	int		cnt;
 
 	cnt = 0;
 	va_start(ap, format);
@@ -51,14 +63,16 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (ft_strchr("cspdiuxX", *format))
+			if (ft_strchr("cspdiuxX%%", *format))
 				cnt += type_chk(*format, ap);
-			else if (*format == '%')
-				cnt += printf_chr('%');
+			if ((end_f(cnt, ap)) == -1)
+				return (-1);
 		}
 		else
 		{
 			cnt += printf_chr(*format);
+			if (end_f(cnt, ap) == -1)
+				return (-1);
 		}
 		format++;
 	}

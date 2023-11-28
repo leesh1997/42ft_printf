@@ -6,13 +6,13 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:37:52 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:36:30 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:35:17 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	ft_putnbr(unsigned long long nbr)
+static int	ft_putnbr(unsigned long long nbr)
 {
 	if (nbr >= 16)
 	{
@@ -22,10 +22,17 @@ static void	ft_putnbr(unsigned long long nbr)
 	else
 	{
 		if (nbr <= 9)
-			ft_putchar_fd((nbr + '0'), 1);
+		{
+			if ((ft_putchar_fd((nbr + '0'), 1)) == -1)
+				return (-1);
+		}
 		else
-			ft_putchar_fd((nbr - 10 + 'a'), 1);
+		{
+			if ((ft_putchar_fd((nbr - 10 + 'a'), 1)) == -1)
+				return (-1);
+		}
 	}
+	return (1);
 }
 
 int	printf_pt(unsigned long long n)
@@ -36,9 +43,12 @@ int	printf_pt(unsigned long long n)
 	cnt = 0;
 	nbr = n;
 	cnt += printf_str("0x");
+	if (cnt == -1)
+		return (-1);
 	if (nbr == 0)
 		cnt++;
-	ft_putnbr(n);
+	if ((ft_putnbr(n)) == -1)
+		return (-1);
 	while (nbr != 0)
 	{
 		cnt++;

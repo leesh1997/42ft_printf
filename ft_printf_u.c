@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:03:12 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/25 17:05:51 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:44:50 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	printf_u(unsigned int n)
 	}
 	if (nb < 10)
 	{
-		ft_putchar_fd(nb + '0', 1);
+		if ((ft_putchar_fd(nb + '0', 1)) == -1)
+			return (-1);
 	}
 	cnt = 1;
 	while (n >= 10)

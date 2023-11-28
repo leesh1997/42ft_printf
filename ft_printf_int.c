@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:03:57 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:35:27 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:46:41 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	printf_int(int n)
 
 	cnt = 0;
 	num = n;
-	ft_putnbr_fd(n, 1);
+	if ((ft_putnbr_fd(n, 1)) == -1)
+		return (-1);
 	if (num == 0)
 		cnt++;
 	if (num < 0 && num > -2147483648)

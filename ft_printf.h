@@ -6,7 +6,7 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 17:46:08 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/27 20:33:40 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:32:08 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 int			ft_printf(const char *format, ...);
 char		*ft_strchr(const char *str, int c);
 int			ft_putchar_fd(char c, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
+int			ft_putnbr_fd(int n, int fd);
+int			ft_putstr_fd(char *s, int fd);
 int			printf_chr(char c);
 int			printf_int(int n);
 int			printf_str(char *s);

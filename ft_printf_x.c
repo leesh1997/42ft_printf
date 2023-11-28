@@ -6,13 +6,13 @@
 /*   By: seunghun <seunghun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:25:15 by seunghun          #+#    #+#             */
-/*   Updated: 2023/11/27 19:36:50 by seunghun         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:24:34 by seunghun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	putnbr_lower(unsigned long long nbr)
+static int	putnbr_lower(unsigned long long nbr)
 {
 	if (nbr >= 16)
 	{
@@ -22,13 +22,20 @@ static void	putnbr_lower(unsigned long long nbr)
 	else
 	{
 		if (nbr <= 9)
-			ft_putchar_fd((nbr + '0'), 1);
+		{
+			if (ft_putchar_fd((nbr + '0'), 1) == -1)
+				return (-1);
+		}
 		else
-			ft_putchar_fd((nbr - 10 + 'a'), 1);
+		{
+			if (ft_putchar_fd((nbr - 10 + 'a'), 1) == -1)
+				return (-1);
+		}
 	}
+	return (1);
 }
 
-static void	putnbr_upper(unsigned long long nbr)
+static int	putnbr_upper(unsigned long long nbr)
 {
 	if (nbr >= 16)
 	{
@@ -38,10 +45,17 @@ static void	putnbr_upper(unsigned long long nbr)
 	else
 	{
 		if (nbr <= 9)
-			ft_putchar_fd((nbr + '0'), 1);
+		{
+			if ((ft_putchar_fd((nbr + '0'), 1)) == -1)
+				return (-1);
+		}
 		else
-			ft_putchar_fd((nbr - 10 + 'A'), 1);
+		{
+			if ((ft_putchar_fd((nbr - 10 + 'A'), 1)) == -1)
+				return (-1);
+		}
 	}
+	return (0);
 }
 
 int	printf_x(char format, unsigned int n)
@@ -55,11 +69,13 @@ int	printf_x(char format, unsigned int n)
 		cnt++;
 	if (format == 'x')
 	{
-		putnbr_lower(n);
+		if ((putnbr_lower(n)) == -1)
+			return (-1);
 	}
 	else if (format == 'X')
 	{
-		putnbr_upper(n);
+		if ((putnbr_upper(n)) == -1)
+			return (-1);
 	}
 	while (nbr != 0)
 	{
